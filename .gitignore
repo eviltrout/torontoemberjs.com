@@ -7,6 +7,9 @@
 # Ignore bundler config
 /.bundle
 
+# Ignore robin's stupid deploy script
+deploy
+
 # Ignore the build directory
 /build
 

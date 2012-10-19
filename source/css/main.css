@@ -98,7 +98,8 @@ body {
     width: 500px;
     background-color: #eaecff;
     color: #101443;
-    text-shadow: 1px 1px 1px #fff
+    text-shadow: 1px 1px 1px #fff;
+    padding-bottom: 100px;
 }
 
 date {
@@ -136,6 +137,7 @@ form input[type=submit] {
     padding: 5px;
 }
  
+
 
 
 

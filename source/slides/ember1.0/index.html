@@ -1,0 +1,390 @@
+<!--
+Google IO 2012 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke MahÃ© <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EmberTo September 2013</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/ember-raccoon-128.png"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+
+  <!-- SLIDES -->
+  <slide>
+    <hgroup>
+      <h2>What Changed?</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <img src="http://www.mentalfloss.com/blogs/wp-content/uploads/2011/02/550_alotAlix.jpg">
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Seriously, what changed?</h2>
+    </hgroup>
+    <article>
+      <p>Ember 1.0 relased on August 31, 2013, ~ 2 and a half years since the first commit</p>
+      <ul>
+        <li>Router Facelift (rc.6)</li>
+        <li>Ember Testing (rc.6)</li>
+        <li>Ember Components (rc.6)</li>
+        <li>New actions hash in Router, Controller, View (rc.8)</li>
+        <li>Array based computed properties</li>
+        <li>Preparation for Modules</li>
+        <li>Observers</li>
+        <li>Ember Inspector from Chrome</li>
+        <li>Performace Improvements</li>
+        <li>Larger Documentation</li>
+        <li>Ember Data 1.0 Beta 2</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Router Facelift</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>promise-based</li>
+        <li>new model hooks
+          <ul>
+            <li>beforeModel</li>
+            <li>model</li>
+            <li>afterModel</li>
+          </ul>
+        </li>
+        <li>redirect deprecated</li>
+        <li>loading route</li>
+        <li>error action</li>
+        <li><code>loading</code> class on links with the <code>{{link-to}}</code> helper</li>
+        <li><a href="https://gist.github.com/machty/5723945">gist from @machty</a></li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Ember Testing</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Integration Testing framework</li>
+	<li>no complex drivers (c.f. selenium, headless browsers)</li>
+	<li>uses promises to manange asychronicity</li>
+        <li>built-in adapter for qunit</li>
+        <li> Simple API:</li>
+      </ul>
+	    <pre><code>
+            visit(url)
+            find(selector,context)
+            fillIn(input_selector, text)
+            click(selector)
+            keyDown(selector, type, keyCode)
+            wait()
+	    </code></pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Ember Components</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Views on steroids</li>
+        <li>Ember Components follow the W3C Custom Element spec</li>
+        <li>Define them like templates under <code>components/name</code></li>
+        <li>They have a different scope, you have to bind properties to them</li>
+        <li>
+          Html content can be rendered inside a component using the <code>{{yield}}</code> helper and the component's block form <code>{{#component-name}}</code>
+        </li>
+        <li>All components are instances of <code>Ember.Component</code> or its subclasses</li>
+        <li>Customizing components is similar to views, you can define <code>tagName</code>, <code>className</code>, custom properties, etc.</li>
+        <li>Actions do not bubble</li>
+        <li>To send action to the application use the <code>sendAction()</code> method</li>
+        <li><code>TextField</code> and <code>TextArea</code> are now components</li>
+        <li><a href="http://pixelhandler.com/blog/2013/08/25/create-a-custom-select-box-using-ember-component/">great tutorial on creating a custom select component</a></li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>New actions hash</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li><code>events</code> hash in routes deprecated (use <code>actions</code> hash instead)</li>
+        <li>functions on controllers in action dispatch chain deprecated (use <code>actions</code> hash instead)</li>
+        <li>i.e. need to call <code>controller.send(actionName)</code> instead of <code>controller.actionName()</code></li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>ArrayComputed</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+        <li>CP defined with <code>@each</code> are recalculated every time one of the members changes</li>
+        <li>these new properties work directly on arrays and can be <b>chained</b>
+          <ul>
+            <li><code>computed.max</code></li>
+            <li><code>computed.min</code></li>
+            <li><code>computed.map</code></li>
+            <li><code>computed.mapBy</code></li>
+            <li><code>computed.filter</code></li>
+            <li><code>computed.filterBy</code></li>
+            <li><code>computed.uniq</code></li>
+            <li><code>computed.intersect</code></li>
+            <li><code>computed.setDiff</code></li>
+            <li><code>computed.sort</code></li>
+          </ul>
+        </li>
+        <li><a href="https://github.com/emberjs/ember.js/commit/fc6e2f5c39aa64d2fceecf23b8fdbb2f7901bcf5#packages/ember-runtime/lib/computed/reduce_computed_macros.js">the original commit</a></li>
+        <li><a href="http://emberjs.com/blog/2013/08/29/ember-1-0-rc8.html">Rc8 blog post</a></li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>ArrayComputed Example</h2>
+      <h3>(stolen from the ember blog)</h3>
+    </hgroup>
+    <article class="smaller">
+      <pre class="prettyprint" data-lang="javascript">
+App.Person = Ember.Object.extend({
+    childAges: function() {
+        return this.get('children').mapProperty('age');
+    }.property('children.@each.age')
+});
+      </pre>
+      becomes
+      <br>
+      <br>
+      <pre class="prettyprint" data-lang="javascript">
+App.Person = Ember.Object.extend({
+    childAges: Ember.computed.mapBy('children', 'age')
+});
+      </pre>
+      <ul>
+        <li>When an element is added or removed, the computation is only done once.</li>
+        <li>i.e. if a child is added, their age is appended to childAges</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Ember Inspector from Chrome</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>deep integration with entire stack (including Ember Data!)</li>
+        <li>drill down to contents of live application at runtime, including Ember Data store</li>
+        <li>built in ember</li>
+        <li><a href="https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi?hl=en">now available in Chrome store</a></li>
+        <li>FireFox port in progress</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Performace Improvements</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li>object creation is more efficient</li>
+	<li>computed properties are lazy</li>
+	<li>(most of the time)</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>New observer semantics</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li>observers do not fire for properties set on init</li>
+      <pre class="prettyprint" data-lang="javascript">
+App.Something = Em.Object.extend({
+  init: function() {
+    // this used to cause the observer to fire
+    this.set('someProperty', 'foo');
+  },
+
+  somePropertyObserver: function() {
+    console.log('someProperty changed');
+  }.observes('someProperty').on('init'); // <- now required
+});
+      </pre>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>New observer semantics II</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li>observers on computed path WILL NOT FIRE UNTIL PATH IS FORCED</li>
+      <pre class="prettyprint" data-lang="javascript">
+App.SomethingController = Em.Controller.extend({
+  needs: ['somethingElse']
+  
+  somethingElse: Em.computed('controller.somethingElse.dongles')
+
+  // will never fire until @get('somethingElse.dongles') is called
+  somethingElseDonglesObserver: function() {
+    console.log('someProperty changed');
+  }.observes('somethingElse.dongles.@each')
+});
+      </pre>
+	<li>observer use should be rare--almost everything should be done with CPs</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Comprehensive Documentation (1.0.0)</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li><b>Everything</b> is documented now</li>
+        <li>old/deprecated/non-idiomatic things removed from documentation</li>
+        <li>way better internals documentation</li>
+        <li>tons more guides</li>
+        <li><a href="https://github.com/emberjs/website/tree/master/source/guides/cookbook">cookbook</a> for common application problems and solutions (to be released but there are already some interesting things here)</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>EMBER DATA 1.0 BETA 2</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li>gigantic release</li>
+	<li>major internals rewrite</li>
+	<li>lazy materialization gone</li>
+	<li>promises used more consistently</li>
+	<li>more consistent API behavior</li>
+	<li>lots of breaking changes</li>
+	<li>read the TRANSITION.md guide</li>
+	<li>port new/small apps now</li>
+	<li>port larger/established apps once things stabilize</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Ember Data - Serialization</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li>no transformations by default</li>
+	<li>no longer works with ActiveModelSerializers out of the box</li>
+	<li>(possibly) easier for non-rails backends (closer to Django APIs)</li>
+        <li>will eventually be `DS.AMSSerializer`, `DS.DjangoSerializer`, etc.</li>
+        <li>for now, customize (lots of hooks available)</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Ember Data - API shift</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li><code>find</code>, <code>all</code>, <code>createRecord</code>, etc. called from <code>store</code>, not model classes</li>
+	<li>store injected into relevant contexts (controllers, routes)</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Ember Data - Promises</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li>finders used to return "promisey" models</li>
+	<li>i.e. could be used as promises or models that would have data populated async</li>
+	<li>*all* finders now return promises, not models</li>
+	<li>more or less equivalent for success case in <code>model</code> load via route</li>
+	<li>helps clean up custom error handling in routes</li>
+	<li>promise proxies can be bound into templates and data will update on resolve</li>
+        <li><a href="http://jsbin.com/iBEdudi/4">example</a></li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Ember Data - MOAR</h2>
+    </hgroup>
+    <article>
+      <ul>
+	<li><a href="https://github.com/emberjs/data/blob/master/TRANSITION.md">TRANSITION.md</a> is your friend</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/ember-raccoon-128.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>&lt;Thank You!&gt;</h2>
+      <p>Now let's port some apps!</p>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+  <slide class="backdrop"></slide>
+</slides>
+
+</body>
+</html>

@@ -7,9 +7,6 @@
 # Ignore bundler config
 /.bundle
 
-# Ignore robin's stupid deploy script
-deploy
-
 # Ignore the build directory
 /build
 
@@ -17,3 +14,5 @@ deploy
 /.sass-cache
 
 .DS_Store
+
+s3cfg

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+bundle exec middleman build
+(cd build; s3cmd -c ../s3cfg sync . s3://torontoemberjs.com)
+
